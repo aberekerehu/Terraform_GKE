@@ -5,22 +5,42 @@ WordPress should be deployed on GKE and
 should scale from 2 to 10 pods depending on CPU usage automatically
 */
 
+
 # GKE Cluster
 resource "google_container_cluster" "wordpress_cluster" {
   name     = var.cluster-name
   location = "${var.target-cloud-region}" 
 
   node_pool {
-    name       = "default-pool"
+    name       = "wordpress-node-pool"
     initial_node_count = 2
     autoscaling {
+     
       min_node_count = 2
       max_node_count = 4
     }
+    node_config {
+      machine_type = "e2-medium" 
+    }
+  }
+  
+  timeouts {
+    create = "30m"
+    update = "20m"
   }
 
   remove_default_node_pool = true
   deletion_protection = false
+}
+
+
+# Null resource to wait for the GKE cluster to be ready
+resource "null_resource" "wait_for_cluster" {
+  depends_on = [google_container_cluster.wordpress_cluster]
+
+  provisioner "local-exec" {
+    command = "sleep 60"
+  }
 }
 
 
@@ -30,7 +50,7 @@ resource "google_sql_database_instance" "master" {
   region           = "us-central1"
 
   settings {
-    tier = "db-n1-standard-2"
+    tier = "db-f1-micro"
   }
   deletion_protection = false
 }
@@ -56,6 +76,7 @@ resource "kubernetes_deployment" "wordpress_deployment" {
   metadata {
     name = "wordpress-deployment"
   }
+  # depends_on = [google_container_cluster.wordpress_cluster]
 
   spec {
     replicas = 2
@@ -115,7 +136,7 @@ resource "kubernetes_service" "wordpress_service" {
   metadata {
     name = "wordpress-service"
   }
-
+  depends_on = [kubernetes_deployment.wordpress_deployment ]
   spec {
     selector = {
       app = "wordpress"
@@ -130,10 +151,14 @@ resource "kubernetes_service" "wordpress_service" {
   }
 
   timeouts {
-    create = "30m"
+    create = "20m"
   }
 }
-
+//Wait For LoadBalancer to Register IPs
+resource "time_sleep" "wait_60_seconds" {
+  create_duration = "60s"
+  depends_on      = [kubernetes_deployment.wordpress_deployment ]
+}
 /*
 The WordPress website should be exposed with an ingress with HTTP and HTTPS (a self-signed certificate can be used for HTTPS)
 */
@@ -148,7 +173,7 @@ resource "kubernetes_ingress_v1" "wordpress_ingress" {
   spec {
     rule {
       host = "wideopstask.com"
-
+    
       http {
         path {
           path = "/"
@@ -201,6 +226,8 @@ resource "kubernetes_horizontal_pod_autoscaler" "wordpress_autoscaler" {
   metadata {
     name = "wordpress"
   }
+
+  depends_on = [ kubernetes_deployment.wordpress_deployment ]
 
   spec {
     scale_target_ref {

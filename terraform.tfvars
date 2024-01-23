@@ -4,6 +4,7 @@ target-cloud-project-name = "wideops-terraform-provisioning"
 target-cloud-region = "me-west1-a"
 target-cloud-credentials = "./wideops-terraform-provisioning-e7cac86a62b9.json"
 
+
 cluster-name = "wordpress-cluster"
 #treshold for the kubernetes horizontal pod autoscaler
 pod-cpu-utilization-percentage-treshold = 50
