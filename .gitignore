@@ -1,0 +1,15 @@
+# environment variables
+.env
+# certification file
+csr.conf
+ca.*
+server.key
+
+#credentials
+wideops-terraform-provisioning-e7cac86a62b9.*
+
+# Terraform related files
+/.terraform
+.terraform.*
+terraform.tfstate
+terraform.tfstate.backup
