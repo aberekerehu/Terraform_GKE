@@ -147,7 +147,7 @@ resource "kubernetes_ingress_v1" "wordpress_ingress" {
 
   spec {
     rule {
-      host = "example.com"
+      host = "wideopstask.com"
 
       http {
         path {
@@ -166,10 +166,10 @@ resource "kubernetes_ingress_v1" "wordpress_ingress" {
       }
     }
 
-    tls {
-      hosts       = ["example.com"]
-      secret_name = "wordpress-tls-secret"
-    }
+    # tls {
+    #   hosts       = ["wideopstask.com"]
+    #   secret_name = "wordpress-tls-secret"
+    # }
   }
 }
 
