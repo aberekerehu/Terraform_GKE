@@ -34,9 +34,10 @@ variable "database-instance" {
   description = "DB instance name"
 }
 
-variable "database-host" {
+
+variable "database-connection-name" {
   type        = string
-  description = "DB host"
+  description = "DB connection name"
 }
 variable "database-port" {
   type        = number

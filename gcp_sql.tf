@@ -6,6 +6,16 @@ resource "google_sql_database_instance" "master" {
 
   settings {
     tier = "db-f1-micro"
+    location_preference {
+      zone = "me-west1-a"  #
+    }
+    ip_configuration {
+      ipv4_enabled    = true
+      authorized_networks {
+        name   = "allow-all"
+        value  = "0.0.0.0/0"
+      }
+    }
   }
   deletion_protection = false
 }

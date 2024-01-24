@@ -27,10 +27,11 @@ resource "kubernetes_deployment" "wordpress_deployment" {
 
           dynamic "env" {
             for_each = {
-              WORDPRESS_DB_HOST      = var.database-host
-              WORDPRESS_DB_USER      = var.database-username
-              WORDPRESS_DB_PASSWORD  = var.database-password
-              WORDPRESS_DB_NAME      = var.database-name
+              INSTANCE_CONNECTION_NAME = var.database-connection-name
+              WORDPRESS_DB_HOST        = "${google_sql_database_instance.master.public_ip_address}:3306"
+              WORDPRESS_DB_USER        = var.database-username
+              WORDPRESS_DB_PASSWORD    = var.database-password
+              WORDPRESS_DB_NAME        = var.database-name
             }
 
             content {
@@ -52,5 +53,7 @@ resource "kubernetes_deployment" "wordpress_deployment" {
         }
       }
     }
+    
   }
+
 }

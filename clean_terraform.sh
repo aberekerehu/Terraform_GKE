@@ -18,3 +18,9 @@ echo "Terraform cleanup completed."
 # Enable debug mode
 # export TF_LOG=DEBUG
 # unset TF_LOG
+
+# initialize Terraform with required plugins
+terraform init
+
+
+#terraform apply -auto-approve
