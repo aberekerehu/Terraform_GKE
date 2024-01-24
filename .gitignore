@@ -5,6 +5,9 @@ csr.conf
 ca.*
 server.key
 
+# open ssl
+server.*
+
 #credentials
 wideops-terraform-provisioning-e7cac86a62b9.*
 
