@@ -2,7 +2,7 @@
 resource "google_sql_database_instance" "master" {
   name             = "${var.database-instance}"
   database_version = "${var.database-version}"
-  region           = "us-central1"
+  region           = "me-west1"
 
   settings {
     tier = "db-f1-micro"

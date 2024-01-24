@@ -40,6 +40,11 @@ resource "kubernetes_ingress_v1" "wordpress_ingress" {
   wait_for_load_balancer = true
   metadata {
     name = "wordpress-ingress"
+    annotations = {
+      "nginx.ingress.kubernetes.io/rewrite-target" = "/"
+      "nginx.ingress.kubernetes.io/proxy-body-size" = "50m"
+      
+    }
   }
   spec {
     rule {
@@ -67,5 +72,4 @@ resource "kubernetes_ingress_v1" "wordpress_ingress" {
       secret_name = "wordpress-tls-secret"
     }
   }
-  
 }

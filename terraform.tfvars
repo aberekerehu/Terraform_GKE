@@ -10,7 +10,8 @@ cluster-name = "wordpress-cluster"
 pod-cpu-utilization-percentage-treshold = 50
 
 database-instance = "wideops-wordpress-sql-instance"
-database-host = "wideops-terraform-provisioning:us-central1:wideops-wordpress-sql-instance"
+database-host = "34.165.5.35:3306" 
+# database-connection-name = "wideops-terraform-provisioning:us-central1:wideops-wordpress-sql-instance"
 database-port = 3306
 database-name = "wideops"
 database-username = "admin"

@@ -27,11 +27,10 @@ resource "kubernetes_deployment" "wordpress_deployment" {
 
           dynamic "env" {
             for_each = {
-              WORDPRESS_DB_HOST     = "${var.database-host}"
-              WORDPRESS_DB_PORT     = "${var.database-port}"
-              WORDPRESS_DB_NAME     = "${var.database-name}"
-              WORDPRESS_DB_USER     = "${var.database-username}"
-              WORDPRESS_DB_PASSWORD = "${var.database-password}"
+              WORDPRESS_DB_HOST      = var.database-host
+              WORDPRESS_DB_USER      = var.database-username
+              WORDPRESS_DB_PASSWORD  = var.database-password
+              WORDPRESS_DB_NAME      = var.database-name
             }
 
             content {
