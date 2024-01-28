@@ -1,6 +1,5 @@
 # Kubernetes Secret
 
-
 resource "kubernetes_secret" "tls_secret" {
   metadata {
     name = "wordpress-tls-secret"

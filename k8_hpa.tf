@@ -4,9 +4,7 @@ resource "kubernetes_horizontal_pod_autoscaler" "wordpress_autoscaler" {
   metadata {
     name = "wordpress"
   }
-
   depends_on = [ kubernetes_deployment.wordpress_deployment ]
-
   spec {
     scale_target_ref {
       api_version = "apps/v1"

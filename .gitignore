@@ -16,3 +16,6 @@ wideops-terraform-provisioning-e7cac86a62b9.*
 .terraform.*
 terraform.tfstate
 terraform.tfstate.backup
+
+# stress test file
+stress_test.*

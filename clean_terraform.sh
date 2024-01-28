@@ -22,5 +22,5 @@ echo "Terraform cleanup completed."
 # initialize Terraform with required plugins
 terraform init
 
-
-#terraform apply -auto-approve
+# Apply terraform configuration
+# terraform apply -auto-approve

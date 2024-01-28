@@ -3,23 +3,19 @@ resource "kubernetes_deployment" "wordpress_deployment" {
     name = "wordpress-deployment"
   }
   depends_on = [google_sql_database_instance.master, google_container_cluster.wordpress_cluster]
-
   spec {
     replicas = 2
-
     selector {
       match_labels = {
         app = "wordpress"
       }
     }
-
     template {
       metadata {
         labels = {
           app = "wordpress"
         }
       }
-
       spec {
         container {
           name  = "wordpress"
@@ -33,13 +29,11 @@ resource "kubernetes_deployment" "wordpress_deployment" {
               WORDPRESS_DB_PASSWORD    = var.database-password
               WORDPRESS_DB_NAME        = var.database-name
             }
-
             content {
               name  = env.key
               value = env.value
             }
           }
-
           resources {
             limits = {
               cpu    = "500m"
@@ -52,8 +46,6 @@ resource "kubernetes_deployment" "wordpress_deployment" {
           }
         }
       }
-    }
-    
+    } 
   }
-
 }

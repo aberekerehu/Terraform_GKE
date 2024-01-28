@@ -43,16 +43,14 @@ resource "kubernetes_ingress_v1" "wordpress_ingress" {
     annotations = {
       "nginx.ingress.kubernetes.io/rewrite-target" = "/"
       "nginx.ingress.kubernetes.io/proxy-body-size" = "50m"
-      
     }
   }
   spec {
     rule {
       host = "wideopstask.com"
-    
       http {
         path {
-          path = "/"
+          path      = "/"
           path_type = "Prefix"
 
           backend {
@@ -66,7 +64,6 @@ resource "kubernetes_ingress_v1" "wordpress_ingress" {
         }
       }
     }
-
     tls {
       hosts       = ["wideopstask.com"]
       secret_name = "wordpress-tls-secret"
