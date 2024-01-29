@@ -45,6 +45,7 @@ resource "kubernetes_ingress_v1" "wordpress_ingress" {
       "nginx.ingress.kubernetes.io/proxy-body-size" = "50m"
     }
   }
+  depends_on = [time_sleep.wait_60_seconds]
   spec {
     rule {
       host = "wideopstask.com"
@@ -64,9 +65,9 @@ resource "kubernetes_ingress_v1" "wordpress_ingress" {
         }
       }
     }
-    tls {
-      hosts       = ["wideopstask.com"]
-      secret_name = "wordpress-tls-secret"
-    }
+    # tls {
+    #   hosts       = ["wideopstask.com"]
+    #   secret_name = "wordpress-tls-secret"
+    # }
   }
 }

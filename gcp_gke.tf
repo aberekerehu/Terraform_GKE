@@ -14,7 +14,7 @@ resource "google_container_cluster" "wordpress_cluster" {
     initial_node_count = 2
     autoscaling {
       min_node_count = 2
-      max_node_count = 4
+      max_node_count = 10
     }
     node_config {
       machine_type = "e2-medium" 

@@ -13,7 +13,7 @@ resource "kubernetes_horizontal_pod_autoscaler" "wordpress_autoscaler" {
     }
 
     min_replicas = 2
-    max_replicas = 4
+    max_replicas = 10
 
     target_cpu_utilization_percentage = var.pod-cpu-utilization-percentage-treshold
   }
