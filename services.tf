@@ -17,8 +17,9 @@ resource "kubernetes_service" "wordpress_service" {
     port {
       port        = 80
       target_port = 80
+      node_port = 30080
     }
-    type = "LoadBalancer"
+    type = "NodePort"
   }
   timeouts {
     create = "20m"
@@ -48,6 +49,7 @@ resource "kubernetes_ingress_v1" "wordpress_ingress_new" {
   depends_on = [time_sleep.wait_60_seconds]
   spec {
     rule {
+      # host = "akerehdevops.xyz"
       http {
         path {
           path      = "/"
@@ -64,6 +66,7 @@ resource "kubernetes_ingress_v1" "wordpress_ingress_new" {
       }
     }
     tls {
+      # hosts = ["akerehdevops.xyz"]
       secret_name = "wordpress-tls-secret"
     }
     

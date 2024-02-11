@@ -34,16 +34,16 @@ resource "kubernetes_deployment" "wordpress_deployment" {
               value = env.value
             }
           }
-          resources {
-            limits = {
-              cpu    = "500m"
-              memory = "512Mi"
-            }
-            requests = {
-              cpu    = "250m"
-              memory = "256Mi"
-            }
-          }
+          # resources {
+          #   limits = {
+          #     cpu    = "500m"
+          #     memory = "512Mi"
+          #   }
+          #   requests = {
+          #     cpu    = "250m"
+          #     memory = "256Mi"
+          #   }
+          # }
         }
       }
     } 

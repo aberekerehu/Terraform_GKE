@@ -5,7 +5,7 @@ resource "google_sql_database_instance" "master" {
   region           = "me-west1"
   depends_on = [ google_container_cluster.wordpress_cluster ]
   settings {
-    tier = "db-f1-micro"
+    tier = "db-n1-standard-1"
     location_preference {
       zone = "me-west1-a"  #
     }
