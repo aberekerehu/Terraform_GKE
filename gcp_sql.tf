@@ -3,16 +3,17 @@ resource "google_sql_database_instance" "master" {
   name             = "${var.database-instance}"
   database_version = "${var.database-version}"
   region           = "me-west1"
-
+  depends_on = [ google_container_cluster.wordpress_cluster ]
   settings {
     tier = "db-f1-micro"
     location_preference {
       zone = "me-west1-a"  #
     }
+    
     ip_configuration {
       ipv4_enabled    = true
       authorized_networks {
-        name   = "allow-all"
+        name   = "allow-from-all"
         value  = "0.0.0.0/0"
       }
     }

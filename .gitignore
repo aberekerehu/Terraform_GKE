@@ -4,6 +4,9 @@
 csr.conf
 ca.*
 server.key
+cert*
+*.conf
+*.pem
 
 # open ssl
 server.*
@@ -19,3 +22,6 @@ terraform.tfstate.backup
 
 # stress test file
 stress_test.*
+
+# script files
+selfsignedcertificate.sh

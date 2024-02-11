@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# terraform destroy
+terraform destroy
 # Remove Terraform state files
 rm terraform.tfstate terraform.tfstate.backup
 

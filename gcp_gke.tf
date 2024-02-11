@@ -28,15 +28,6 @@ resource "google_container_cluster" "wordpress_cluster" {
   deletion_protection = false
 }
 
-# Null resource to wait for the GKE cluster to be ready
-resource "null_resource" "wait_for_cluster" {
-  depends_on = [google_container_cluster.wordpress_cluster]
-
-  provisioner "local-exec" {
-    command = "sleep 60"
-  }
-}
-
 
 
 

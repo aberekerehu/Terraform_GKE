@@ -5,11 +5,11 @@ target-cloud-region = "me-west1-a"
 target-cloud-credentials = "./wideops-terraform-provisioning-e7cac86a62b9.json"
 
 
-cluster-name = "wordpress-cluster"
+cluster-name = "wordpress-cluster-new"
 #treshold for the kubernetes horizontal pod autoscaler
 pod-cpu-utilization-percentage-treshold = 50
 
-database-instance = "wideops-wordpress-sql-instance"
+database-instance = "wideops-wordpress-sql-instance-new"
 database-connection-name = "google_sql_database_instance.instance.public_ip_address"
 database-port = 3306
 database-name = "wideops"
